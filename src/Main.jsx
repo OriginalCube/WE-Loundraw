@@ -1,5 +1,6 @@
 import React from "react";
 import Visualizer from "./components/Visualizer";
+import Player from "./components/Player";
 
 const Main = () => {
   const [canvasId, setCanvasId] = React.useState(0);
@@ -30,7 +31,7 @@ const Main = () => {
         src="./assets/foreground/blue-1-f.png"
         alt=""
       />
-      <div className="absolute h-10 w-10 bg-black" onClick={onCanvas}></div>
+      <Player />
     </div>
   );
 };
