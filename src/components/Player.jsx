@@ -4,11 +4,15 @@ import SongData from "../Data.json";
 const Player = () => {
   //Music Integration
   const songData = SongData["SongData"];
-  const [songId, setSongId] = React.useState(0);
+  const [songId, setSongId] = React.useState(
+    Math.floor(Math.random() * songData.length - 1)
+  );
   const [songName, setSongName] = React.useState("");
   const [volume, setVolume] = React.useState(0.3);
   const [isPlaying, setPlaying] = React.useState(false);
   const [trackProgress, setProgress] = React.useState(0);
+  const [replay, setReplay] = React.useState(false);
+  const [shuffle, setShuffle] = React.useState(false);
   const intervalRef = React.useRef();
   const audioRef = React.useRef(new Audio());
   const isReady = React.useRef(true);
@@ -16,6 +20,22 @@ const Player = () => {
 
   const onPlay = () => {
     setPlaying(!isPlaying);
+  };
+
+  const onSkip = () => {
+    if (songId + 1 < songData.length) {
+      setSongId(songId + 1);
+    } else {
+      setSongId(0);
+    }
+  };
+
+  const onPrev = () => {
+    if (songId - 1 >= 0) {
+      setSongId(songId - 1);
+    } else {
+      setSongId(songData.length - 1);
+    }
   };
 
   const startTimer = () => {
@@ -113,6 +133,7 @@ const Player = () => {
         </div>
         <div className="w-full">
           <img
+            onClick={onPrev}
             className="opacity-90 object-contain "
             style={{ height: "3vh", width: "3vw" }}
             src="./assets/icons/volumeMinus.png"
@@ -138,6 +159,7 @@ const Player = () => {
         </div>
         <div className="w-full">
           <img
+            onClick={onSkip}
             className="opacity-90 object-contain"
             style={{ height: "3vh", width: "3vw" }}
             src="./assets/icons/next.png"

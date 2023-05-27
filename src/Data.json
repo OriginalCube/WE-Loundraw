@@ -1,5 +1,13 @@
 {
   "SongData": [
-    { "name": "Ahead of Us", "file": "./assets/music/Ahead of Us.mp3" }
+    { "name": "Ahead of Us", "file": "./assets/music/Ahead of Us.mp3" },
+    {
+      "name": "I want to see you",
+      "file": "./assets/music/I want to see you.mp3"
+    },
+    {
+      "name": "Because I love you",
+      "file": "./assets/music/Because I love you.mp3"
+    }
   ]
 }
