@@ -3,7 +3,7 @@ import Visualizer from "./components/Visualizer";
 import Player from "./components/Player";
 
 const Main = () => {
-  const [canvasId, setCanvasId] = React.useState(0);
+  const [canvasId, setCanvasId] = React.useState(3);
 
   const onCanvas = () => {
     if (canvasId + 1 <= 3) {
