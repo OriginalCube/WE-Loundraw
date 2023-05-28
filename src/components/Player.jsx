@@ -5,7 +5,7 @@ const Player = () => {
   //Music Integration
   const songData = SongData["SongData"];
   const [songId, setSongId] = React.useState(
-    Math.floor(Math.random() * songData.length - 1)
+    Math.floor(Math.random() * (songData.length - 1))
   );
   const [songName, setSongName] = React.useState("");
   const [volume, setVolume] = React.useState(0.3);
@@ -18,8 +18,16 @@ const Player = () => {
   const isReady = React.useRef(true);
   const { duration } = audioRef.current;
 
+  let keypress = new Audio();
+  const clickAudio = (e) => {
+    keypress.src = `./assets/sounds/${e === 0 ? "keypress" : "notes"}.mp3`;
+    keypress.volume = 0.3;
+    keypress.play();
+  };
+
   const onPlay = () => {
     setPlaying(!isPlaying);
+    clickAudio(1);
   };
 
   const onSkip = () => {
@@ -28,6 +36,7 @@ const Player = () => {
     } else {
       setSongId(0);
     }
+    clickAudio(0);
   };
 
   const onPrev = () => {
@@ -36,6 +45,33 @@ const Player = () => {
     } else {
       setSongId(songData.length - 1);
     }
+    clickAudio(0);
+  };
+
+  const addVolume = () => {
+    if (volume >= 0 && volume + 0.1 <= 1) {
+      setVolume(volume + 0.1);
+    }
+    clickAudio(0);
+  };
+
+  const lessVolume = () => {
+    if (volume - 0.1 > 0) {
+      setVolume(Math.round((volume - 0.1) * 10) / 10);
+    } else {
+      setVolume(0);
+    }
+    clickAudio(0);
+  };
+
+  const onReplay = () => {
+    setReplay(!replay);
+    clickAudio(0);
+  };
+
+  const onShuffle = () => {
+    setShuffle(!shuffle);
+    clickAudio(0);
   };
 
   const startTimer = () => {
@@ -43,7 +79,7 @@ const Player = () => {
     clearInterval(intervalRef.current);
     intervalRef.current = setInterval(() => {
       if (audioRef.current.ended) {
-        //skip
+        onSkip();
       } else {
         setProgress(audioRef.current.currentTime);
       }
@@ -125,15 +161,16 @@ const Player = () => {
       <div className="flex w-full h-1/2 relative items-center justify-items-start">
         <div className="w-full">
           <img
+            onClick={onReplay}
             className="opacity-90 object-contain "
             style={{ height: "3vh", width: "3vw" }}
-            src="./assets/icons/replay.png"
+            src={`./assets/icons/${!replay ? "replay" : "replayToggle"}.png`}
             alt=""
           />
         </div>
         <div className="w-full">
           <img
-            onClick={onPrev}
+            onClick={lessVolume}
             className="opacity-90 object-contain "
             style={{ height: "3vh", width: "3vw" }}
             src="./assets/icons/volumeMinus.png"
@@ -142,6 +179,7 @@ const Player = () => {
         </div>
         <div className="w-full">
           <img
+            onClick={onPrev}
             className="opacity-90 object-contain"
             style={{ height: "3vh", width: "3vw" }}
             src="./assets/icons/prev.png"
@@ -168,6 +206,7 @@ const Player = () => {
         </div>
         <div className="w-full">
           <img
+            onClick={addVolume}
             className="opacity-90 object-contain"
             style={{ height: "3vh", width: "3vw" }}
             src="./assets/icons/volumePlus.png"
@@ -176,9 +215,10 @@ const Player = () => {
         </div>
         <div className="w-full">
           <img
+            onClick={onShuffle}
             className="opacity-90 object-contain"
             style={{ height: "3vh", width: "3vw" }}
-            src="./assets/icons/shuffle.png"
+            src={`./assets/icons/${!shuffle ? "shuffle" : "shuffleToggle"}.png`}
             alt=""
           />
         </div>
