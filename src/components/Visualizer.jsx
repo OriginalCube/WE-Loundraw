@@ -237,7 +237,7 @@ const Visualizer = (props) => {
     }
 
     function animateRain() {
-      ctx.globalAlpha = 0.65;
+      ctx.globalAlpha = 0.75;
       ctx.strokeStyle = "white";
       ctx.lineWidth = 0.8;
       ctx.lineCap = "round";
@@ -245,7 +245,7 @@ const Visualizer = (props) => {
       let w = window.innerWidth;
       let h = window.innerHeight;
       var init = [];
-      var maxParts = 500;
+      var maxParts = 250;
       for (var a = 0; a < maxParts; a++) {
         init.push({
           x: Math.random() * window.innerWidth,

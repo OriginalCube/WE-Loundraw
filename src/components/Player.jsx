@@ -1,14 +1,18 @@
 import React from "react";
 import SongData from "../Data.json";
 
-const Player = () => {
+const Player = (props) => {
   //Music Integration
   const songData = SongData["SongData"];
   const [songId, setSongId] = React.useState(
     Math.floor(Math.random() * (songData.length - 1))
   );
   const [songName, setSongName] = React.useState("");
-  const [volume, setVolume] = React.useState(0.3);
+  const [volume, setVolume] = React.useState(
+    localStorage.getItem("volume") !== null
+      ? +localStorage.getItem("volume")
+      : 0.2
+  );
   const [isPlaying, setPlaying] = React.useState(false);
   const [trackProgress, setProgress] = React.useState(0);
   const [replay, setReplay] = React.useState(false);
@@ -100,9 +104,10 @@ const Player = () => {
   };
 
   React.useEffect(() => {
-    audioRef.current.volume = volume;
+    audioRef.current.volume = 0 + volume;
     localStorage.setItem("volume", volume);
-  }, [volume]);
+    console.log(props.volume);
+  }, [volume, props.volume]);
 
   React.useEffect(() => {
     if (isPlaying) {
@@ -117,7 +122,7 @@ const Player = () => {
     audioRef.current.pause();
     audioRef.current = new Audio(`${songData[songId].file}`);
     setSongName(songData[songId].name);
-    audioRef.current.volume = volume;
+    audioRef.current.volume = 0 + volume;
     if (isReady.current) {
       audioRef.current.play();
       setPlaying(true);
@@ -145,7 +150,7 @@ const Player = () => {
         <input
           type="range"
           className="w-full relative m-auto"
-          style={{ top: "72%" }}
+          style={{ top: "60%" }}
           step="1"
           min="0"
           value={trackProgress}
@@ -158,11 +163,11 @@ const Player = () => {
       <div className="w-full h-1/5 text-white font-thin">
         <p className="text-center">{songName}</p>
       </div>
-      <div className="flex w-full h-1/2 relative items-center justify-items-start">
+      <div className="flex w-full h-1/2 relative items-center justify-center">
         <div className="w-full">
           <img
             onClick={onReplay}
-            className="opacity-90 object-contain "
+            className="opacity-90 m-auto object-contain "
             style={{ height: "3vh", width: "3vw" }}
             src={`./assets/icons/${!replay ? "replay" : "replayToggle"}.png`}
             alt=""
@@ -171,7 +176,7 @@ const Player = () => {
         <div className="w-full">
           <img
             onClick={lessVolume}
-            className="opacity-90 object-contain "
+            className="opacity-90 object-contain  m-auto"
             style={{ height: "3vh", width: "3vw" }}
             src="./assets/icons/volumeMinus.png"
             alt=""
@@ -180,7 +185,7 @@ const Player = () => {
         <div className="w-full">
           <img
             onClick={onPrev}
-            className="opacity-90 object-contain"
+            className="opacity-90 object-contain m-auto"
             style={{ height: "3vh", width: "3vw" }}
             src="./assets/icons/prev.png"
             alt=""
@@ -189,7 +194,7 @@ const Player = () => {
         <div className="w-full">
           <img
             onClick={onPlay}
-            className="opacity-90 object-contain"
+            className="opacity-90 object-contain m-auto"
             style={{ height: "4vh", width: "4vw" }}
             src={`./assets/icons/${!isPlaying ? "pause" : "play"}.png`}
             alt=""
@@ -198,7 +203,7 @@ const Player = () => {
         <div className="w-full">
           <img
             onClick={onSkip}
-            className="opacity-90 object-contain"
+            className="opacity-90 object-contain m-auto"
             style={{ height: "3vh", width: "3vw" }}
             src="./assets/icons/next.png"
             alt=""
@@ -207,7 +212,7 @@ const Player = () => {
         <div className="w-full">
           <img
             onClick={addVolume}
-            className="opacity-90 object-contain"
+            className="opacity-90 object-contain m-auto"
             style={{ height: "3vh", width: "3vw" }}
             src="./assets/icons/volumePlus.png"
             alt=""
@@ -216,7 +221,7 @@ const Player = () => {
         <div className="w-full">
           <img
             onClick={onShuffle}
-            className="opacity-90 object-contain"
+            className="opacity-90 object-contain m-auto"
             style={{ height: "3vh", width: "3vw" }}
             src={`./assets/icons/${!shuffle ? "shuffle" : "shuffleToggle"}.png`}
             alt=""
