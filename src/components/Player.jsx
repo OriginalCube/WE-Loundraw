@@ -143,7 +143,7 @@ const Player = (props) => {
 
   return (
     <div
-      className="h-1/6 w-1/4 absolute flex flex-col bottom-14 "
+      className="h-36 w-1/4 absolute flex flex-col bottom-10"
       style={{ left: "36.6%" }}
     >
       <div className="w-full h-1/2">
@@ -163,12 +163,12 @@ const Player = (props) => {
       <div className="w-full h-1/5 text-white font-thin">
         <p className="text-center">{songName}</p>
       </div>
-      <div className="flex w-full h-1/2 relative items-center justify-center">
+      <div className="flex w-5/6 m-auto h-1/2 relative items-center justify-center">
         <div className="w-full">
           <img
             onClick={onReplay}
             className="opacity-90 m-auto object-contain "
-            style={{ height: "3vh", width: "3vw" }}
+            style={{ height: "2vh", width: "2vw" }}
             src={`./assets/icons/${!replay ? "replay" : "replayToggle"}.png`}
             alt=""
           />
@@ -177,7 +177,7 @@ const Player = (props) => {
           <img
             onClick={lessVolume}
             className="opacity-90 object-contain  m-auto"
-            style={{ height: "3vh", width: "3vw" }}
+            style={{ height: "2vh", width: "2vw" }}
             src="./assets/icons/volumeMinus.png"
             alt=""
           />
@@ -186,7 +186,7 @@ const Player = (props) => {
           <img
             onClick={onPrev}
             className="opacity-90 object-contain m-auto"
-            style={{ height: "3vh", width: "3vw" }}
+            style={{ height: "2vh", width: "2vw" }}
             src="./assets/icons/prev.png"
             alt=""
           />
@@ -195,7 +195,7 @@ const Player = (props) => {
           <img
             onClick={onPlay}
             className="opacity-90 object-contain m-auto"
-            style={{ height: "4vh", width: "4vw" }}
+            style={{ height: "3vh", width: "3vw" }}
             src={`./assets/icons/${!isPlaying ? "pause" : "play"}.png`}
             alt=""
           />
@@ -204,7 +204,7 @@ const Player = (props) => {
           <img
             onClick={onSkip}
             className="opacity-90 object-contain m-auto"
-            style={{ height: "3vh", width: "3vw" }}
+            style={{ height: "2vh", width: "2vw" }}
             src="./assets/icons/next.png"
             alt=""
           />
@@ -213,7 +213,7 @@ const Player = (props) => {
           <img
             onClick={addVolume}
             className="opacity-90 object-contain m-auto"
-            style={{ height: "3vh", width: "3vw" }}
+            style={{ height: "2vh", width: "2vw" }}
             src="./assets/icons/volumePlus.png"
             alt=""
           />
@@ -222,7 +222,7 @@ const Player = (props) => {
           <img
             onClick={onShuffle}
             className="opacity-90 object-contain m-auto"
-            style={{ height: "3vh", width: "3vw" }}
+            style={{ height: "2vh", width: "2vw" }}
             src={`./assets/icons/${!shuffle ? "shuffle" : "shuffleToggle"}.png`}
             alt=""
           />
