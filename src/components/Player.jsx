@@ -143,8 +143,8 @@ const Player = (props) => {
 
   return (
     <div
-      className="h-36 w-1/4 absolute flex flex-col bottom-10"
-      style={{ left: "36.6%" }}
+      className="w-1/4 absolute flex flex-col bottom-10"
+      style={{ height: "13vh", left: "37.5%" }}
     >
       <div className="w-full h-1/2">
         <input

@@ -3,10 +3,13 @@ import Visualizer from "./components/Visualizer";
 import Player from "./components/Player";
 import MainData from "./Data.json";
 import Navigation from "./components/Navigation";
+import AudioVisualizer from "./components/AudioVisualizer";
 
 const Main = () => {
   const [canvasId, setCanvasId] = React.useState(1);
+  const [visualizer, setVisualizer] = React.useState(true);
   const [backgroundId, setBackgroundId] = React.useState(1);
+  const [player, setPlayer] = React.useState(true);
   const imageData = MainData["ImageData"];
 
   const onCanvas = () => {
@@ -25,6 +28,14 @@ const Main = () => {
     }
   };
 
+  const onVisualizer = () => {
+    setVisualizer(!visualizer);
+  };
+
+  const onPlayer = () => {
+    setPlayer(!player);
+  };
+
   return (
     <div className="h-full w-full">
       <img
@@ -39,12 +50,15 @@ const Main = () => {
         src={`${imageData[backgroundId].foreground}`}
         alt=""
       />
+      {visualizer ? <AudioVisualizer /> : null}
       <Navigation
         onCanvas={onCanvas}
         canvasId={canvasId}
+        onPlayer={onPlayer}
+        onVisualizer={onVisualizer}
         onBackground={onBackground}
       />
-      <Player />
+      {player ? <Player /> : null}
     </div>
   );
 };
