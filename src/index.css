@@ -18,7 +18,7 @@ code {
 
 .navigation-icon {
   position: absolute;
-  top: 5.5%;
+  bottom: 5.5%;
   right: 3vh;
   width: 5vh;
   height: 5vh;
@@ -28,10 +28,10 @@ code {
 
 .navigation-icon-container {
   position: absolute;
-  top: 15%;
-  right: 1.5vh;
-  width: 8vh;
-  height: 30%;
+  bottom: 5.5%;
+  right: 5vw;
+  width: 25%;
+  height: 5.5vh;
   justify-content: space-around;
 }
 

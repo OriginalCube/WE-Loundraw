@@ -49,28 +49,28 @@ const Navigation = (props) => {
         onClick={onSetting}
         src="./assets/icons/setting.png"
         alt=""
-        className="navigation-icon"
+        className="navigation-icon z-10"
       />
       {setting ? (
-        <div className="navigation-icon-container flex flex-col">
-          <div className="h-full w-4/5 m-auto overflow-visible">
+        <div className="z-0 navigation-icon-container flex justify-center items-center">
+          <div className="h-full w-4/5 m-auto overflow-visible flex justify-center items-center">
             <img
               onClick={onPlayer}
               src="./assets/icons/headphones.png"
               alt=""
             />
           </div>
-          <div className="h-full w-full">
+          <div className="h-full w-full flex justify-center items-center">
             <img onClick={onVisualizer} src="./assets/icons/sound.png" alt="" />
           </div>
-          <div className="h-full w-full">
+          <div className="h-full w-full flex justify-center items-center">
             <img
               onClick={customBg}
               src="./assets/icons/background.png"
               alt=""
             />
           </div>
-          <div className="h-full w-full">
+          <div className="h-full w-full flex justify-center items-center">
             <img
               onClick={onRemoveVis}
               src={`./assets/icons/${canvasData[props.canvasId]}.png`}
