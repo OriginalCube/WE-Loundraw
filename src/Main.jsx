@@ -14,6 +14,7 @@ const Main = () => {
   const [backgroundId, setBackgroundId] = React.useState(1);
   const [player, setPlayer] = React.useState(true);
   const [TWeather, setTWeather] = React.useState(true);
+  const [clock, setClock] = React.useState(true);
   const [fontSize, setFontSize] = React.useState(1);
   const [weather, setWeather] = React.useState(
     localStorage.getItem("tempWeather")
@@ -50,6 +51,10 @@ const Main = () => {
     setTWeather(!TWeather);
   };
 
+  const onClock = () => {
+    setClock(!clock);
+  };
+
   //Weather Request
   const weatherRequest = async () => {
     const weatherData = await axios.get(
@@ -63,9 +68,10 @@ const Main = () => {
   }, [weather]);
 
   const readWeather = () => {
-    const tempDate = new Date(weather.data.current.last_updated).getDay();
-    const currentDate = new Date().getDay();
-    return currentDate > tempDate;
+    const tempDate = new Date(weather.data.current.last_updated).getHours();
+    const currentDate = new Date().getHours();
+    return Math.abs(tempDate - currentDate) >= 6;
+    // return currentDate > tempDate;
   };
 
   React.useEffect(() => {
@@ -103,8 +109,9 @@ const Main = () => {
         onVisualizer={onVisualizer}
         onWeather={onWeather}
         onBackground={onBackground}
+        onClock={onClock}
       />
-      <Clock fontSize={fontSize} />
+      {clock ? <Clock fontSize={fontSize} /> : null}
       {player ? <Player fontSize={fontSize} /> : null}
     </div>
   );

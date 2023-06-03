@@ -48,6 +48,11 @@ const Navigation = (props) => {
     onSound(0);
   };
 
+  const onClock = () => {
+    props.onClock();
+    onSound(1);
+  };
+
   return (
     <>
       <img
@@ -77,6 +82,9 @@ const Navigation = (props) => {
           </div>
           <div className="h-full w-full flex justify-center items-center">
             <img onClick={onWeather} src={`./assets/icons/rain.png`} alt="" />
+          </div>
+          <div className="h-full w-full flex justify-center items-center">
+            <img onClick={onClock} src={`./assets/icons/clock.png`} alt="" />
           </div>
           <div className="h-full w-full flex justify-center items-center">
             <img

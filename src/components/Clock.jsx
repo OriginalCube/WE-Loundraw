@@ -29,7 +29,7 @@ const Clock = (props) => {
         <span
           className={`relative`}
           style={{
-            fontSize: `${(textSize / 2.5) * 10}rem`,
+            fontSize: `${(textSize / 3) * 10}rem`,
             bottom: "-1.5vh",
             color: `white`,
           }}

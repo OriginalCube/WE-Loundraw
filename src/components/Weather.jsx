@@ -7,10 +7,10 @@ const Weather = (props) => {
   const HourWeather = (e) => {
     return e.hour % 6 === 0 ? (
       <div className="flex justify-around items-center w-full h-1/4">
-        <p className="font-light" style={{ fontSize: `${textSize * 2}rem` }}>
-          {e.hour}hr
+        <p className="font-light" style={{ fontSize: `${textSize * 1.75}rem` }}>
+          +{e.hour}hr
         </p>
-        <img className="w-1/2 h-auto" src={e.icon} alt="" />
+        <img className="w-1/2 h-auto" src={"https:" + e.icon} alt="" />
       </div>
     ) : null;
   };
@@ -29,7 +29,7 @@ const Weather = (props) => {
             <div className="">
               <img
                 className="justify-center items-center opacity-90"
-                src={`${current.condition.icon}`}
+                src={`https:${current.condition.icon}`}
                 alt=""
               />{" "}
             </div>
