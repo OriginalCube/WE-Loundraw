@@ -3,9 +3,6 @@ import React from "react";
 const Weather = (props) => {
   const { current, forecast, location } = props.weather.data;
   const [textSize, setTextSize] = React.useState(0.5);
-  React.useEffect(() => {
-    console.log(forecast.forecastday[0].hour);
-  }, []);
 
   const HourWeather = (e) => {
     return e.hour % 6 === 0 ? (

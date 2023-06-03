@@ -13,8 +13,12 @@ const Main = () => {
   const [visualizer, setVisualizer] = React.useState(true);
   const [backgroundId, setBackgroundId] = React.useState(1);
   const [player, setPlayer] = React.useState(true);
+  const [TWeather, setTWeather] = React.useState(true);
+  const [fontSize, setFontSize] = React.useState(1);
   const [weather, setWeather] = React.useState(
-    JSON.parse(localStorage.getItem("tempWeather"))
+    localStorage.getItem("tempWeather")
+      ? JSON.parse(localStorage.getItem("tempWeather"))
+      : MainData.tempWeather
   );
   const imageData = MainData["ImageData"];
 
@@ -42,21 +46,38 @@ const Main = () => {
     setPlayer(!player);
   };
 
+  const onWeather = () => {
+    setTWeather(!TWeather);
+  };
+
   //Weather Request
   const weatherRequest = async () => {
     const weatherData = await axios.get(
       "https://api.weatherapi.com/v1/forecast.json?key=9240155493f04f5994181506230206&q=Manila&days=1&aqi=no&alerts=no"
     );
-    localStorage.setItem("tempWeather", JSON.stringify(weatherData));
-  };
-
-  const readWeather = async () => {
-    console.log(await weather);
+    setWeather(weatherData);
   };
 
   React.useEffect(() => {
-    // weatherRequest();
-    readWeather();
+    localStorage.setItem("tempWeather", JSON.stringify(weather));
+  }, [weather]);
+
+  const readWeather = () => {
+    const tempDate = new Date(weather.data.current.last_updated).getDay();
+    const currentDate = new Date().getDay();
+    return currentDate > tempDate;
+  };
+
+  React.useEffect(() => {
+    if (window.innerWidth < 1390) {
+      setFontSize(0.75);
+    }
+    if (readWeather()) {
+      weatherRequest();
+      console.log("Fetched Data.");
+    } else {
+      console.log("Current Weather is up to Date!");
+    }
   }, []);
 
   return (
@@ -74,16 +95,17 @@ const Main = () => {
         alt=""
       />
       {visualizer ? <AudioVisualizer /> : null}
-      <Weather weather={weather} />
+      {TWeather ? <Weather fontSize={fontSize} weather={weather} /> : null}
       <Navigation
         onCanvas={onCanvas}
         canvasId={canvasId}
         onPlayer={onPlayer}
         onVisualizer={onVisualizer}
+        onWeather={onWeather}
         onBackground={onBackground}
       />
-      <Clock />
-      {player ? <Player /> : null}
+      <Clock fontSize={fontSize} />
+      {player ? <Player fontSize={fontSize} /> : null}
     </div>
   );
 };

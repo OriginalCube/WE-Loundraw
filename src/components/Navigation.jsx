@@ -38,6 +38,11 @@ const Navigation = (props) => {
     onSound(1);
   };
 
+  const onWeather = () => {
+    props.onWeather();
+    onSound(1);
+  };
+
   const onSetting = () => {
     setSetting(!setting);
     onSound(0);
@@ -69,6 +74,9 @@ const Navigation = (props) => {
               src="./assets/icons/background.png"
               alt=""
             />
+          </div>
+          <div className="h-full w-full flex justify-center items-center">
+            <img onClick={onWeather} src={`./assets/icons/rain.png`} alt="" />
           </div>
           <div className="h-full w-full flex justify-center items-center">
             <img

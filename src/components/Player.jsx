@@ -7,7 +7,9 @@ const Player = (props) => {
   const [songId, setSongId] = React.useState(
     Math.floor(Math.random() * (songData.length - 1))
   );
+  const [textSize, setTextSize] = React.useState(0.1);
   const [songName, setSongName] = React.useState("");
+  const [artistName, setArtistName] = React.useState("");
   const [volume, setVolume] = React.useState(
     localStorage.getItem("volume") !== null
       ? +localStorage.getItem("volume")
@@ -106,8 +108,7 @@ const Player = (props) => {
   React.useEffect(() => {
     audioRef.current.volume = 0 + volume;
     localStorage.setItem("volume", volume);
-    console.log(props.volume);
-  }, [volume, props.volume]);
+  }, [volume]);
 
   React.useEffect(() => {
     if (isPlaying) {
@@ -122,6 +123,7 @@ const Player = (props) => {
     audioRef.current.pause();
     audioRef.current = new Audio(`${songData[songId].file}`);
     setSongName(songData[songId].name);
+    setArtistName(songData[songId].artist);
     audioRef.current.volume = 0 + volume;
     if (isReady.current) {
       audioRef.current.play();
@@ -144,9 +146,9 @@ const Player = (props) => {
   return (
     <div
       className="w-1/4 absolute flex flex-col bottom-10"
-      style={{ height: "13vh", left: "37.5%" }}
+      style={{ height: "12vh", left: "37.5%" }}
     >
-      <div className="w-full h-1/2">
+      <div className="w-full h-2/6">
         <input
           type="range"
           className="w-full relative m-auto"
@@ -160,10 +162,15 @@ const Player = (props) => {
           onKeyUp={onScrubEnd}
         />
       </div>
-      <div className="w-full h-1/5 text-white font-thin">
-        <p className="text-center">{songName}</p>
+      <div className="w-full h-2/6 text-white flex items-center justify-center">
+        <p
+          style={{ fontSize: `${textSize * 10}rem` }}
+          className="text-center font-thin opacity-90"
+        >
+          {songName}
+        </p>
       </div>
-      <div className="flex w-5/6 m-auto h-1/2 relative items-center justify-center">
+      <div className="flex w-5/6 m-auto h-2/6 relative items-center justify-center">
         <div className="w-full">
           <img
             onClick={onReplay}
