@@ -67,22 +67,9 @@ const Main = () => {
     localStorage.setItem("tempWeather", JSON.stringify(weather));
   }, [weather]);
 
-  const readWeather = () => {
-    const tempDate = new Date(weather.data.current.last_updated).getHours();
-    const currentDate = new Date().getHours();
-    return Math.abs(tempDate - currentDate) >= 6;
-    // return currentDate > tempDate;
-  };
-
   React.useEffect(() => {
     if (window.innerWidth < 1390) {
       setFontSize(0.75);
-    }
-    if (readWeather()) {
-      weatherRequest();
-      console.log("Fetched Data.");
-    } else {
-      console.log("Current Weather is up to Date!");
     }
   }, []);
 
@@ -101,7 +88,13 @@ const Main = () => {
         alt=""
       />
       {visualizer ? <AudioVisualizer /> : null}
-      {TWeather ? <Weather fontSize={fontSize} weather={weather} /> : null}
+      {TWeather ? (
+        <Weather
+          weatherRequest={weatherRequest}
+          fontSize={fontSize}
+          weather={weather}
+        />
+      ) : null}
       <Navigation
         onCanvas={onCanvas}
         canvasId={canvasId}

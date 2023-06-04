@@ -4,6 +4,17 @@ const Weather = (props) => {
   const { current, forecast, location } = props.weather.data;
   const [textSize, setTextSize] = React.useState(0.5);
 
+  React.useEffect(() => {
+    const tempDate = new Date(current.last_updated);
+    const checker = Math.abs(tempDate.getHours() - new Date().getHours());
+    if (checker >= 2) {
+      props.weatherRequest();
+      console.log("Updated Weather.");
+    } else {
+      console.log("Weather is up to date.");
+    }
+  }, []);
+
   const HourWeather = (e) => {
     return e.hour % 6 === 0 ? (
       <div className="flex justify-around items-center w-full h-1/4">
