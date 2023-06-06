@@ -3,6 +3,7 @@ import React from "react";
 const Weather = (props) => {
   const { current, forecast, location } = props.weather.data;
   const [textSize, setTextSize] = React.useState(0.5);
+  const [fSize, setFSize] = React.useState(1);
 
   React.useEffect(() => {
     const tempDate = new Date(current.last_updated);
@@ -13,12 +14,18 @@ const Weather = (props) => {
     } else {
       console.log("Weather is up to date.");
     }
+    if (window.innerHeight < 800) {
+      setFSize(0.75);
+    }
   }, []);
 
   const HourWeather = (e) => {
     return e.hour % 6 === 0 ? (
       <div className="flex justify-around items-center w-full h-1/4">
-        <p className="font-light" style={{ fontSize: `${textSize * 1.75}rem` }}>
+        <p
+          className="font-light"
+          style={{ fontSize: `${textSize * (1.75 * fSize)}rem` }}
+        >
           +{e.hour}hr
         </p>
         <img className="w-1/2 h-auto" src={"https:" + e.icon} alt="" />
@@ -48,7 +55,7 @@ const Weather = (props) => {
           <div className="w-full h-full">
             <p
               className="font-semibold"
-              style={{ fontSize: `${textSize * 10}rem` }}
+              style={{ fontSize: `${textSize * (10 * fSize)}rem` }}
             >
               {current.temp_c}°
             </p>
@@ -57,7 +64,7 @@ const Weather = (props) => {
         <div className="w-full h-1/2">
           <p
             className="text-right font-medium pt-2 pr-8"
-            style={{ fontSize: `${textSize * 3.5}rem` }}
+            style={{ fontSize: `${textSize * (3.5 * fSize)}rem` }}
           >
             {current.condition.text}
           </p>

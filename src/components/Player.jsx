@@ -8,6 +8,7 @@ const Player = (props) => {
     Math.floor(Math.random() * (songData.length - 1))
   );
   const [textSize, setTextSize] = React.useState(0.1);
+  const [fSize, setFsize] = React.useState(1);
   const [songName, setSongName] = React.useState("");
   const [artistName, setArtistName] = React.useState("");
   const [volume, setVolume] = React.useState(
@@ -137,6 +138,12 @@ const Player = (props) => {
   }, [songId]);
 
   React.useEffect(() => {
+    if (window.innerHeight < 800) {
+      console.log(window.innerHeight);
+      setFsize(0.75);
+    } else {
+      setFsize(1);
+    }
     return () => {
       audioRef.current.pause();
       clearInterval(intervalRef.current);
@@ -164,7 +171,7 @@ const Player = (props) => {
       </div>
       <div className="w-full h-2/6 text-white flex items-center justify-center">
         <p
-          style={{ fontSize: `${textSize * 10}rem` }}
+          style={{ fontSize: `${textSize * (10 * fSize)}rem` }}
           className="text-center font-thin opacity-90"
         >
           {songName}

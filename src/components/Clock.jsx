@@ -5,6 +5,7 @@ const Clock = (props) => {
   const [minute, setMinute] = React.useState("0");
   const [second, setSecond] = React.useState("");
   const [textSize, setTextSize] = React.useState(0.75);
+  const [fSize, setFSize] = React.useState(1);
   React.useEffect(() => {
     setInterval(() => {
       let currentTime = new Date();
@@ -12,6 +13,9 @@ const Clock = (props) => {
       setMinute(currentTime.getMinutes());
       setSecond(currentTime.getSeconds());
     }, 1000);
+    if (window.innerHeight < 800) {
+      setFSize(0.75);
+    }
   }, []);
 
   return (
@@ -21,7 +25,7 @@ const Clock = (props) => {
         style={{
           color: `white`,
           textShadow: `2px 2px 4px rgba(255,255,255,.4)`,
-          fontSize: `${textSize * 10}rem`,
+          fontSize: `${textSize * (10 * fSize)}rem`,
         }}
       >
         {hour + ":"}
@@ -29,7 +33,7 @@ const Clock = (props) => {
         <span
           className={`relative`}
           style={{
-            fontSize: `${(textSize / 3) * 10}rem`,
+            fontSize: `${(textSize / 3) * (10 * fSize)}rem`,
             bottom: "-1.5vh",
             color: `white`,
           }}
