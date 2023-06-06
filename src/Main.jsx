@@ -12,10 +12,13 @@ const Main = () => {
   const [canvasId, setCanvasId] = React.useState(1);
   const [visualizer, setVisualizer] = React.useState(true);
   const [backgroundId, setBackgroundId] = React.useState(1);
+  const [city, setCity] = React.useState("Tokyo");
   const [player, setPlayer] = React.useState(true);
   const [TWeather, setTWeather] = React.useState(true);
   const [clock, setClock] = React.useState(true);
   const [fontSize, setFontSize] = React.useState(1);
+  const [errMessage, setErrMessage] = React.useState("");
+  const [apiKey, setApiKey] = React.useState("");
   const [weather, setWeather] = React.useState(
     localStorage.getItem("tempWeather")
       ? JSON.parse(localStorage.getItem("tempWeather"))
@@ -57,11 +60,38 @@ const Main = () => {
 
   //Weather Request
   const weatherRequest = async () => {
-    const weatherData = await axios.get(
-      "https://api.weatherapi.com/v1/forecast.json?key=9240155493f04f5994181506230206&q=Manila&days=1&aqi=no&alerts=no"
-    );
-    setWeather(weatherData);
+    try {
+      const weatherData = await axios.get(
+        `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&days=1&aqi=no&alerts=no`
+      );
+      if (weatherData) {
+        setWeather(weatherData);
+        setErrMessage("");
+      }
+    } catch (err) {
+      console.log(err.response.data.error.message);
+      setErrMessage(err.response.data.error.message);
+    }
+    console.log("Weather Requested");
   };
+
+  try {
+    window.wallpaperPropertyListener = {
+      applyUserProperties: function (properties) {
+        if (properties.inputcity) {
+          setCity(properties.inputcity.value);
+        }
+
+        if (properties.apikey) {
+          setApiKey(properties.apikey.value);
+        }
+      },
+    };
+  } catch (err) {}
+
+  React.useEffect(() => {
+    console.log(city);
+  }, [city]);
 
   React.useEffect(() => {
     localStorage.setItem("tempWeather", JSON.stringify(weather));
@@ -93,6 +123,7 @@ const Main = () => {
           weatherRequest={weatherRequest}
           fontSize={fontSize}
           weather={weather}
+          errMessage={errMessage}
         />
       ) : null}
       <Navigation

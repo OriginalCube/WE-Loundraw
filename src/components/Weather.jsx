@@ -19,6 +19,10 @@ const Weather = (props) => {
     }
   }, []);
 
+  const onRefresh = () => {
+    props.weatherRequest();
+  };
+
   const HourWeather = (e) => {
     return e.hour % 6 === 0 ? (
       <div className="flex justify-around items-center w-full h-1/4">
@@ -41,6 +45,21 @@ const Weather = (props) => {
         backgroundColor: `rgba(255,255,255,.1)`,
       }}
     >
+      <div className="absolute top-3 left-3 h-1/6 w-full flex">
+        <img
+          className="boxRotate-anim"
+          onClick={onRefresh}
+          src="./assets/icons/refresh.png"
+          style={{ height: "2vh", width: "auto" }}
+          alt=""
+        />
+        <p
+          className="pl-2 font-light"
+          style={{ fontSize: `${0.1 * (10 * fSize)}rem` }}
+        >
+          {props.errMessage}
+        </p>
+      </div>
       <div className="h-5/6 w-3/4 flex-col">
         <div className="w-5/6 m-auto h-1/2 flex justify-center items-baseline">
           <div className="w-full h-full flex items-end justify-center">
