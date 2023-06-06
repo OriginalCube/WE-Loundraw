@@ -54,6 +54,14 @@
     {
       "foreground": "./assets/foreground/blue-2-f.png",
       "background": "./assets/background/blue-2-b.jpg"
+    },
+    {
+      "foreground": "./assets/foreground/blue-3-f.png",
+      "background": "./assets/background/blue-3-b.jpg"
+    },
+    {
+      "foreground": "./assets/foreground/blue-4-f.png",
+      "background": "./assets/background/blue-4-b.jpg"
     }
   ],
   "tempWeather": {

@@ -84,6 +84,7 @@ const AudioVisualizer = (props) => {
         className="absolute overflow-visible"
         style={{
           left: "38%",
+          borderBottom: `2px solid rgba(255,255,255,.2)`,
           top: `${pos}%`,
         }}
       />

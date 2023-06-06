@@ -19,9 +19,9 @@ const Clock = (props) => {
   }, []);
 
   return (
-    <div className="absolute top-5 right-12 opacity-90">
+    <div className="absolute top-5 right-8 opacity-90">
       <p
-        className={`opacity-80`}
+        className={`opacity-80 font-light`}
         style={{
           color: `white`,
           textShadow: `2px 2px 4px rgba(255,255,255,.4)`,
@@ -31,10 +31,11 @@ const Clock = (props) => {
         {hour + ":"}
         {minute > 9 ? minute : "0" + minute}
         <span
-          className={`relative`}
+          className={`absolute right-0 font-light`}
           style={{
             fontSize: `${(textSize / 3) * (10 * fSize)}rem`,
             bottom: "-1.5vh",
+            textShadow: `2px 2px 4px rgba(255,255,255,.4)`,
             color: `white`,
           }}
         >
