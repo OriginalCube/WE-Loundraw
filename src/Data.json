@@ -64,6 +64,12 @@
       "background": "./assets/background/blue-4-b.jpg"
     }
   ],
+  "loundraw-05": {
+    "player": true,
+    "visualizer": true,
+    "weather": true,
+    "canvas": 1
+  },
   "tempWeather": {
     "data": {
       "location": {
