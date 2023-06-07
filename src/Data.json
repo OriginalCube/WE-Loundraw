@@ -68,6 +68,8 @@
     "player": true,
     "visualizer": true,
     "weather": true,
+    "backgroundId": 2,
+    "clock": true,
     "canvas": 1
   },
   "tempWeather": {

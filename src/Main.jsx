@@ -19,11 +19,11 @@ const Main = () => {
   const [clock, setClock] = React.useState(true);
   const [errMessage, setErrMessage] = React.useState("");
   const [fontSize, setFontSize] = React.useState(1);
-  const [localData, setLocalData] = React.useState({});
+  const [localData, setLocalData] = React.useState();
   const [weather, setWeather] = React.useState(
     localStorage.getItem("tempWeather")
       ? JSON.parse(localStorage.getItem("tempWeather"))
-      : MainData["tempWeather"]
+      : MainData["tempWeather"].data
   );
   const imageData = MainData["ImageData"];
 
@@ -44,20 +44,36 @@ const Main = () => {
   };
 
   const onVisualizer = () => {
+    changeSetting("visualizer", !visualizer);
     setVisualizer(!visualizer);
   };
 
   const onPlayer = () => {
+    changeSetting("player", !player);
     setPlayer(!player);
   };
 
   const onWeather = () => {
+    changeSetting("weather", !TWeather);
     setTWeather(!TWeather);
   };
 
   const onClock = () => {
+    changeSetting("clock", !clock);
     setClock(!clock);
   };
+
+  const changeSetting = (x, y) => {
+    setLocalData({ ...localData, [x]: y });
+  };
+
+  React.useEffect(() => {
+    changeSetting("canvas", canvasId);
+  }, [canvasId]);
+
+  React.useEffect(() => {
+    changeSetting("backgroundId", backgroundId);
+  }, [backgroundId]);
 
   //Weather Request
   const weatherRequest = async () => {
@@ -76,11 +92,15 @@ const Main = () => {
   };
 
   const resetData = () => {
-    localData.setItem("loundraw", JSON.stringify(MainData["loundraw-05"]));
+    localStorage.setItem(
+      "loundraw-05",
+      JSON.stringify(MainData["loundraw-05"])
+    );
     setPlayer(true);
     setVisualizer(true);
     setTWeather(true);
-    setCanvasId(true);
+    setClock(true);
+    setCanvasId(1);
   };
 
   React.useEffect(() => {
@@ -97,6 +117,8 @@ const Main = () => {
         setLocalData(localSetting);
         setPlayer(localSetting.player);
         setVisualizer(localSetting.visualizer);
+        setClock(localSetting.clock);
+        setBackgroundId(localSetting.backgroundId);
         setTWeather(localSetting.weather);
         setCanvasId(localSetting.canvas);
       } else {
