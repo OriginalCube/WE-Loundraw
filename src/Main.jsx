@@ -16,10 +16,6 @@ const Main = () => {
   const [TWeather, setTWeather] = React.useState(true);
   const [clock, setClock] = React.useState(true);
   const [fontSize, setFontSize] = React.useState(1);
-  const [city, setCity] = React.useState("");
-  const [errMessage, setErrMessage] = React.useState("");
-  const [localData, setLocalData] = React.useState({});
-  const [apiKey, setApiKey] = React.useState("9240155493f04f5994181506230206");
   const [weather, setWeather] = React.useState(
     localStorage.getItem("tempWeather")
       ? localStorage.getItem("tempWeather")
@@ -44,60 +40,28 @@ const Main = () => {
   };
 
   const onVisualizer = () => {
-    setSetting("visualizer", !visualizer);
     setVisualizer(!visualizer);
   };
 
   const onPlayer = () => {
-    setSetting("player", !player);
     setPlayer(!player);
   };
 
   const onWeather = () => {
-    setSetting("weather", !TWeather);
     setTWeather(!TWeather);
   };
 
   const onClock = () => {
-    setSetting("clock", !clock);
     setClock(!clock);
-  };
-
-  const setSetting = (x, y) => {
-    setLocalData({ ...localData, [x]: y });
   };
 
   //Weather Request
   const weatherRequest = async () => {
-    try {
-      const weatherData = await axios.get(
-        `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&days=1&aqi=no&alerts=no`
-      );
-      if (weatherData) {
-        console.log(weatherData);
-        setWeather(weatherData);
-        setErrMessage("");
-      }
-    } catch (err) {
-      setErrMessage(err.response.data.error.message);
-      console.log(err.response.data.error.message);
-    }
-    console.log("Weather Requested");
+    const weatherData = await axios.get(
+      "https://api.weatherapi.com/v1/forecast.json?key=9240155493f04f5994181506230206&q=Manila&days=1&aqi=no&alerts=no"
+    );
+    setWeather(weatherData);
   };
-
-  try {
-    window.wallpaperPropertyListener = {
-      applyUserProperties: function (properties) {
-        if (properties.inputcity) {
-          setCity(properties.inputcity.value);
-        }
-
-        if (properties.apikey) {
-          setApiKey(properties.apikey.value);
-        }
-      },
-    };
-  } catch (err) {}
 
   React.useEffect(() => {
     localStorage.setItem("tempWeather", JSON.stringify(weather));
