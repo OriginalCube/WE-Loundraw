@@ -1,14 +1,9 @@
 import React from "react";
-import MainData from "../Data.json";
 
 const Weather = (props) => {
   const { current, forecast, location } = props.weather;
   const [textSize, setTextSize] = React.useState(0.5);
   const [fSize, setFSize] = React.useState(1);
-
-  React.useEffect(() => {
-    console.log(props.weather);
-  }, [props.weather]);
 
   React.useEffect(() => {
     const tempDate = new Date(props.weather.current.last_updated);
@@ -38,6 +33,10 @@ const Weather = (props) => {
     ) : null;
   };
 
+  const onRequest = () => {
+    props.weatherRequest();
+  };
+
   return (
     <div
       className="absolute w-1/5 h-1/3 right-5 text-white top-1/3 rounded-xl flex opacity-90 overflow-hidden items-center"
@@ -46,6 +45,21 @@ const Weather = (props) => {
         backgroundColor: `rgba(255,255,255,.1)`,
       }}
     >
+      <div className="absolute top-0 flex items-center w-full h-1/6 pl-2">
+        <img
+          onClick={onRequest}
+          style={{ height: "2vh" }}
+          className="boxRotate-anim w-auto"
+          src="./assets/icons/refresh.png"
+          alt=""
+        />
+        <p
+          style={{ fontSize: `${0.9 * (1 * fSize)}rem` }}
+          className="font-thin pl-1"
+        >
+          {props.errMessage}
+        </p>
+      </div>
       <div className="h-5/6 w-3/4 flex-col">
         <div className="w-5/6 m-auto h-1/2 flex justify-center items-baseline">
           <div className="w-full h-full flex items-end justify-center">

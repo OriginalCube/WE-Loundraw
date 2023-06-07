@@ -46,6 +46,10 @@ code {
   opacity: 0.8;
 }
 
+.boxRotate-anim {
+  animation: boxRotate 9s infinite;
+}
+
 @keyframes boxTurn {
   33% {
     transform: rotate(45deg);

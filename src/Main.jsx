@@ -9,16 +9,19 @@ import axios from "axios";
 import Weather from "./components/Weather";
 
 const Main = () => {
-  const [canvasId, setCanvasId] = React.useState(0);
+  const [canvasId, setCanvasId] = React.useState(1);
   const [visualizer, setVisualizer] = React.useState(true);
   const [backgroundId, setBackgroundId] = React.useState(1);
   const [player, setPlayer] = React.useState(true);
+  const [apiKey, setApiKey] = React.useState("9240155493f04f5994181506230206");
+  const [city, setCity] = React.useState("Tokyo");
   const [TWeather, setTWeather] = React.useState(true);
   const [clock, setClock] = React.useState(true);
+  const [errMessage, setErrMessage] = React.useState("");
   const [fontSize, setFontSize] = React.useState(1);
   const [weather, setWeather] = React.useState(
     localStorage.getItem("tempWeather")
-      ? localStorage.getItem("tempWeather")
+      ? JSON.parse(localStorage.getItem("tempWeather"))
       : MainData["tempWeather"]
   );
   const imageData = MainData["ImageData"];
@@ -57,10 +60,18 @@ const Main = () => {
 
   //Weather Request
   const weatherRequest = async () => {
-    const weatherData = await axios.get(
-      "https://api.weatherapi.com/v1/forecast.json?key=9240155493f04f5994181506230206&q=Manila&days=1&aqi=no&alerts=no"
-    );
-    setWeather(weatherData);
+    try {
+      const weatherData = await axios.get(
+        `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&days=1&aqi=no&alerts=no`
+      );
+      if (weatherData) {
+        setWeather(weatherData.data);
+        setErrMessage("");
+      }
+    } catch (err) {
+      setErrMessage(err.response.data.error.message);
+      console.log(err.response.data.error.message);
+    }
   };
 
   React.useEffect(() => {
@@ -71,7 +82,19 @@ const Main = () => {
     if (window.innerWidth < 1390) {
       setFontSize(0.75);
     }
+    weatherRequest();
   }, []);
+
+  window.wallpaperPropertyListener = {
+    applyUserProperties: function (properties) {
+      if (properties.apikey) {
+        setApiKey(properties.apikey.value);
+      }
+      if (properties.inputcity) {
+        setCity(properties.inputcity.value);
+      }
+    },
+  };
 
   return (
     <div className="h-full w-full">
@@ -88,11 +111,12 @@ const Main = () => {
         alt=""
       />
       {visualizer ? <AudioVisualizer /> : null}
-      {!TWeather ? (
+      {TWeather ? (
         <Weather
           weatherRequest={weatherRequest}
           fontSize={fontSize}
           weather={weather}
+          errMessage={errMessage}
         />
       ) : null}
       <Navigation
