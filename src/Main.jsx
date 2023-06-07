@@ -9,7 +9,7 @@ import axios from "axios";
 import Weather from "./components/Weather";
 
 const Main = () => {
-  const [canvasId, setCanvasId] = React.useState(1);
+  const [canvasId, setCanvasId] = React.useState(0);
   const [visualizer, setVisualizer] = React.useState(true);
   const [backgroundId, setBackgroundId] = React.useState(1);
   const [city, setCity] = React.useState("Tokyo");
@@ -22,8 +22,8 @@ const Main = () => {
   const [apiKey, setApiKey] = React.useState("9240155493f04f5994181506230206");
   const [weather, setWeather] = React.useState(
     localStorage.getItem("tempWeather")
-      ? JSON.parse(localStorage.getItem("tempWeather"))
-      : MainData.tempWeather
+      ? localStorage.getItem("tempWeather")
+      : MainData["tempWeather"]
   );
   const imageData = MainData["ImageData"];
 
@@ -64,9 +64,7 @@ const Main = () => {
   };
 
   const setSetting = (x, y) => {
-    localData({ ...localData, [x]: y });
-    localData.setItem("loundraw-05", JSON.stringify(localData));
-    setLocalData(localData);
+    setLocalData({ ...localData, [x]: y });
   };
 
   //Weather Request
@@ -76,7 +74,8 @@ const Main = () => {
         `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&days=1&aqi=no&alerts=no`
       );
       if (weatherData) {
-        // setWeather(JSON.parse(weatherData));
+        console.log(weatherData);
+        setWeather(weatherData);
         setErrMessage("");
       }
     } catch (err) {
@@ -101,42 +100,12 @@ const Main = () => {
   } catch (err) {}
 
   React.useEffect(() => {
-    console.log(city);
-  }, [city]);
-
-  React.useEffect(() => {
     localStorage.setItem("tempWeather", JSON.stringify(weather));
   }, [weather]);
-
-  const resetData = () => {
-    localStorage.setItem(
-      "loundraw-05",
-      JSON.stringify(MainData["loundraw-05"])
-    );
-    setPlayer(true);
-    setVisualizer(true);
-    setWeather(true);
-    setCanvasId(1);
-    setLocalData(MainData["loundraw-05"]);
-  };
 
   React.useEffect(() => {
     if (window.innerWidth < 1390) {
       setFontSize(0.75);
-    }
-    try {
-      if (!localStorage.getItem("loundraw-05")) {
-        resetData();
-      } else {
-        const tempData = JSON.parse(localStorage.getItem("loundraw-05"));
-        setLocalData(tempData);
-        setPlayer(localData.player);
-        setVisualizer(localData.visualizer);
-        setWeather(localData.weather);
-        setCanvasId(localData.canvasId);
-      }
-    } catch (err) {
-      resetData();
     }
   }, []);
 
@@ -155,7 +124,7 @@ const Main = () => {
         alt=""
       />
       {visualizer ? <AudioVisualizer /> : null}
-      {TWeather ? (
+      {!TWeather ? (
         <Weather
           weatherRequest={weatherRequest}
           fontSize={fontSize}

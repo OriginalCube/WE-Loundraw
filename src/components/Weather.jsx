@@ -1,12 +1,17 @@
 import React from "react";
+import MainData from "../Data.json";
 
 const Weather = (props) => {
-  const { current, forecast, location } = props.weather.data;
+  const { current, forecast, location } = props.weather;
   const [textSize, setTextSize] = React.useState(0.5);
   const [fSize, setFSize] = React.useState(1);
 
   React.useEffect(() => {
-    const tempDate = new Date(current.last_updated);
+    console.log(props.weather);
+  }, [props.weather]);
+
+  React.useEffect(() => {
+    const tempDate = new Date(props.weather.current.last_updated);
     const checker = Math.abs(tempDate.getHours() - new Date().getHours());
     if (checker >= 2) {
       props.weatherRequest();
@@ -76,7 +81,7 @@ const Weather = (props) => {
               className="font-semibold"
               style={{ fontSize: `${textSize * (10 * fSize)}rem` }}
             >
-              {current.temp_c}°
+              {props.weather.current.temp_c}°
             </p>
           </div>
         </div>
@@ -97,7 +102,7 @@ const Weather = (props) => {
         style={{ borderLeft: `2px solid rgba(255,255,255,.6)` }}
       >
         {forecast.forecastday[0].hour.map((e, index) => (
-          <HourWeather icon={e.condition.icon} hour={index} />
+          <HourWeather key={index} icon={e.condition.icon} hour={index} />
         ))}
       </div>
     </div>
