@@ -37,6 +37,7 @@ const AudioVisualizer = (props) => {
             height + 2,
             20
           );
+          ctx_1.stroke();
           ctx_1.fill();
         }
       }
@@ -55,11 +56,12 @@ const AudioVisualizer = (props) => {
           ctx.beginPath();
           ctx.roundRect(
             barWidth * i + i * whiteSpace,
-            canvas.height - height,
+            2 + canvas.height - height + 2,
             barWidth,
             height,
             20
           );
+          ctx.stroke();
           ctx.fill();
         }
       }
@@ -82,6 +84,7 @@ const AudioVisualizer = (props) => {
         className="absolute overflow-visible"
         style={{
           left: "38%",
+          borderBottom: `2px solid rgba(255,255,255,.2)`,
           top: `${pos}%`,
         }}
       />

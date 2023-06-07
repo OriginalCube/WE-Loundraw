@@ -12,11 +12,11 @@ const Main = () => {
   const [canvasId, setCanvasId] = React.useState(0);
   const [visualizer, setVisualizer] = React.useState(true);
   const [backgroundId, setBackgroundId] = React.useState(1);
-  const [city, setCity] = React.useState("Tokyo");
   const [player, setPlayer] = React.useState(true);
   const [TWeather, setTWeather] = React.useState(true);
   const [clock, setClock] = React.useState(true);
   const [fontSize, setFontSize] = React.useState(1);
+  const [city, setCity] = React.useState("");
   const [errMessage, setErrMessage] = React.useState("");
   const [localData, setLocalData] = React.useState({});
   const [apiKey, setApiKey] = React.useState("9240155493f04f5994181506230206");
@@ -129,7 +129,6 @@ const Main = () => {
           weatherRequest={weatherRequest}
           fontSize={fontSize}
           weather={weather}
-          errMessage={errMessage}
         />
       ) : null}
       <Navigation
