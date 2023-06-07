@@ -19,6 +19,7 @@ const Main = () => {
   const [clock, setClock] = React.useState(true);
   const [errMessage, setErrMessage] = React.useState("");
   const [fontSize, setFontSize] = React.useState(1);
+  const [localData, setLocalData] = React.useState({});
   const [weather, setWeather] = React.useState(
     localStorage.getItem("tempWeather")
       ? JSON.parse(localStorage.getItem("tempWeather"))
@@ -74,6 +75,14 @@ const Main = () => {
     }
   };
 
+  const resetData = () => {
+    localData.setItem("loundraw", JSON.stringify(MainData["loundraw-05"]));
+    setPlayer(true);
+    setVisualizer(true);
+    setTWeather(true);
+    setCanvasId(true);
+  };
+
   React.useEffect(() => {
     localStorage.setItem("tempWeather", JSON.stringify(weather));
   }, [weather]);
@@ -82,7 +91,20 @@ const Main = () => {
     if (window.innerWidth < 1390) {
       setFontSize(0.75);
     }
-    weatherRequest();
+    try {
+      if (localStorage.getItem("loundraw-05")) {
+        const localSetting = JSON.parse(localStorage.getItem("loundraw-05"));
+        setLocalData(localSetting);
+        setPlayer(localSetting.player);
+        setVisualizer(localSetting.visualizer);
+        setTWeather(localSetting.weather);
+        setCanvasId(localSetting.canvas);
+      } else {
+        resetData();
+      }
+    } catch (err) {
+      resetData();
+    }
   }, []);
 
   window.wallpaperPropertyListener = {
