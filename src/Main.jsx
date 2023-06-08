@@ -28,19 +28,25 @@ const Main = () => {
   const imageData = MainData["ImageData"];
 
   const onCanvas = () => {
+    let tempData = 0;
     if (canvasId + 1 <= 3) {
       setCanvasId(canvasId + 1);
+      tempData = canvasId + 1;
     } else {
       setCanvasId(0);
     }
+    changeSetting("canvas", tempData);
   };
 
   const onBackground = () => {
+    let tempData = 0;
     if (backgroundId < imageData.length - 1) {
       setBackgroundId(backgroundId + 1);
+      tempData = backgroundId + 1;
     } else {
       setBackgroundId(0);
     }
+    changeSetting("backgroundId", tempData);
   };
 
   const onVisualizer = () => {
@@ -64,16 +70,11 @@ const Main = () => {
   };
 
   const changeSetting = (x, y) => {
-    setLocalData({ ...localData, [x]: y });
+    const tempData = localData;
+    tempData[x] = y;
+    setLocalData(tempData);
+    localStorage.setItem("loundraw-05", JSON.stringify(tempData));
   };
-
-  React.useEffect(() => {
-    changeSetting("canvas", canvasId);
-  }, [canvasId]);
-
-  React.useEffect(() => {
-    changeSetting("backgroundId", backgroundId);
-  }, [backgroundId]);
 
   //Weather Request
   const weatherRequest = async () => {
