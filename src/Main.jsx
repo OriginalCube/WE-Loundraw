@@ -14,7 +14,7 @@ const Main = () => {
   const [backgroundId, setBackgroundId] = React.useState(1);
   const [player, setPlayer] = React.useState(true);
   const [apiKey, setApiKey] = React.useState("9240155493f04f5994181506230206");
-  const [city, setCity] = React.useState("Tokyo");
+  const [city, setCity] = React.useState("Manila");
   const [TWeather, setTWeather] = React.useState(true);
   const [clock, setClock] = React.useState(true);
   const [errMessage, setErrMessage] = React.useState("");
@@ -85,6 +85,7 @@ const Main = () => {
       if (weatherData) {
         setWeather(weatherData.data);
         setErrMessage("");
+        console.log("Fetched New Weather Data.");
       }
     } catch (err) {
       setErrMessage(err.response.data.error.message);
@@ -104,11 +105,22 @@ const Main = () => {
     setCanvasId(1);
   };
 
+  const readWeather = () => {
+    const currentDate = new Date().getHours();
+    const weatherDate = new Date(weather.current.last_updated).getHours();
+    if (Math.abs(currentDate - weatherDate) > 2) {
+      weatherRequest();
+    } else {
+      console.log("Current weather is up to date.");
+    }
+  };
+
   React.useEffect(() => {
     localStorage.setItem("tempWeather", JSON.stringify(weather));
   }, [weather]);
 
   React.useEffect(() => {
+    readWeather();
     if (window.innerWidth < 1390) {
       setFontSize(0.75);
     }

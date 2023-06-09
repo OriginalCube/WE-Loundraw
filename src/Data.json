@@ -62,6 +62,10 @@
     {
       "foreground": "./assets/foreground/blue-4-f.png",
       "background": "./assets/background/blue-4-b.jpg"
+    },
+    {
+      "foreground": "./assets/foreground/blue-5-f.png",
+      "background": "./assets/background/blue-5-b.jpg"
     }
   ],
   "loundraw-05": {
@@ -70,7 +74,7 @@
     "weather": true,
     "backgroundId": 2,
     "clock": true,
-    "canvas": 1
+    "canvas": 2
   },
   "tempWeather": {
     "data": {

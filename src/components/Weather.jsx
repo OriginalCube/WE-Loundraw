@@ -24,7 +24,10 @@ const Weather = (props) => {
       <div className="flex justify-around items-center w-full h-1/4">
         <p
           className="font-light"
-          style={{ fontSize: `${textSize * (1.75 * fSize)}rem` }}
+          style={{
+            fontSize: `${textSize * (1.75 * fSize)}rem`,
+            textShadow: `1px 1px 2px rgba(0,0,0,.4)`,
+          }}
         >
           +{e.hour}hr
         </p>
@@ -73,8 +76,11 @@ const Weather = (props) => {
           </div>
           <div className="w-full h-full">
             <p
-              className="font-semibold"
-              style={{ fontSize: `${textSize * (10 * fSize)}rem` }}
+              className="font-semibold opacity-90"
+              style={{
+                fontSize: `${textSize * (10 * fSize)}rem`,
+                textShadow: `1px 1px 2px rgba(0,0,0,.4)`,
+              }}
             >
               {props.weather.current.temp_c}°
             </p>
@@ -82,12 +88,20 @@ const Weather = (props) => {
         </div>
         <div className="w-full h-1/2">
           <p
-            className="text-right font-medium pt-2 pr-8"
-            style={{ fontSize: `${textSize * (3.5 * fSize)}rem` }}
+            className="text-right font-medium pt-2 pr-8 opacity-90"
+            style={{
+              fontSize: `${textSize * (3.5 * fSize)}rem`,
+              textShadow: `1px 1px 2px rgba(0,0,0,.4)`,
+            }}
           >
             {current.condition.text}
           </p>
-          <p className="text-right font-light pr-8">
+          <p
+            className="text-right font-light pr-8"
+            style={{
+              textShadow: `1px 1px 2px rgba(0,0,0,.4)`,
+            }}
+          >
             {location.name}, {location.country}
           </p>
         </div>
