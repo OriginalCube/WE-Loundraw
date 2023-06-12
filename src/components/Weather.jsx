@@ -45,7 +45,11 @@ const Weather = (props) => {
       className="absolute w-1/5 h-1/3 right-5 text-white top-1/3 rounded-xl flex opacity-90 overflow-hidden items-center"
       style={{
         border: `2px solid rgba(255,255,255,.6)`,
-        backgroundColor: `rgba(255,255,255,.1)`,
+        backgroundColor: `${
+          props.backgroundId === 2 || props.backgroundId === 4
+            ? "rgba(45,68,110,.3)"
+            : "rgba(255,255,255,.1)"
+        }`,
       }}
     >
       <div className="absolute top-0 flex items-center w-full h-1/6 pl-2">

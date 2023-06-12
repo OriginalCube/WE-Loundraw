@@ -24,7 +24,11 @@ const Clock = (props) => {
         className={`opacity-80 font-light`}
         style={{
           color: `white`,
-          textShadow: `2px 2px 4px rgba(255,255,255,.4)`,
+          textShadow: `2px 2px 4px ${
+            props.backgroundId === 2 || props.backgroundId === 4
+              ? "rgba(45,68,110,.6)"
+              : "rgba(255,255,255,.4)"
+          }`,
           fontSize: `${textSize * (10 * fSize)}rem`,
         }}
       >
@@ -35,7 +39,11 @@ const Clock = (props) => {
           style={{
             fontSize: `${(textSize / 3) * (10 * fSize)}rem`,
             bottom: "-1.5vh",
-            textShadow: `2px 2px 4px rgba(255,255,255,.4)`,
+            textShadow: `2px 2px 4px ${
+              props.backgroundId === 2 || props.backgroundId === 4
+                ? "rgba(45,68,110,.6)"
+                : "rgba(255,255,255,.4)"
+            }`,
             color: `white`,
           }}
         >

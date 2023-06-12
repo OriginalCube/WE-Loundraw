@@ -2,7 +2,7 @@ import React from "react";
 
 const Navigation = (props) => {
   const [setting, setSetting] = React.useState(false);
-  const [uiVolume, setUiVolume] = React.useState(0.5);
+  const [uiVolume, setUiVolume] = React.useState(0.2);
 
   let audioPlayer = new Audio();
 

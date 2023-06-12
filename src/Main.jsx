@@ -23,7 +23,7 @@ const Main = () => {
   const [weather, setWeather] = React.useState(
     localStorage.getItem("tempWeather")
       ? JSON.parse(localStorage.getItem("tempWeather"))
-      : MainData["tempWeather"].data
+      : MainData["tempWeather"]
   );
   const imageData = MainData["ImageData"];
 
@@ -160,7 +160,6 @@ const Main = () => {
         src={`${imageData[backgroundId].background}`}
         alt=""
       />
-      <div className="absolute h-screen w-screen bg-blue-800 opacity-20"></div>
       {canvasId !== 0 ? <Visualizer canvasId={canvasId} /> : null}
       <img
         className="absolute w-full h-full object-cover"
@@ -174,6 +173,7 @@ const Main = () => {
           fontSize={fontSize}
           weather={weather}
           errMessage={errMessage}
+          backgroundId={backgroundId}
         />
       ) : null}
       <Navigation
@@ -185,7 +185,7 @@ const Main = () => {
         onBackground={onBackground}
         onClock={onClock}
       />
-      {clock ? <Clock fontSize={fontSize} /> : null}
+      {clock ? <Clock fontSize={fontSize} backgroundId={backgroundId} /> : null}
       {player ? <Player fontSize={fontSize} /> : null}
     </div>
   );
