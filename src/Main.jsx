@@ -14,7 +14,7 @@ const Main = () => {
   const [backgroundId, setBackgroundId] = React.useState(1);
   const [player, setPlayer] = React.useState(true);
   const [apiKey, setApiKey] = React.useState("9240155493f04f5994181506230206");
-  const [city, setCity] = React.useState("Manila");
+  const [city, setCity] = React.useState("Tokyo");
   const [TWeather, setTWeather] = React.useState(true);
   const [clock, setClock] = React.useState(true);
   const [errMessage, setErrMessage] = React.useState("");
