@@ -3,14 +3,14 @@ import React from "react";
 const AudioVisualizer = (props) => {
   const canvasRef = React.useRef(null);
   const canvasRefUnder = React.useRef(null);
-  const [pos, setPos] = React.useState(77.5);
+  const [pos, setPos] = React.useState(78);
   const [playerColor, setPlayerColor] = React.useState("255,255,255");
   const [playerOpacity, setPlayerOpacity] = React.useState(0.5);
 
   React.useEffect(() => {
     try {
       const canvas = canvasRef.current;
-      canvas.width = window.innerWidth * 0.24;
+      canvas.width = window.innerWidth * 0.2;
       canvas.height = window.innerHeight * 0.1;
       const canvas_1 = canvasRefUnder.current;
       canvas_1.width = window.innerWidth * 0.24;
@@ -83,7 +83,7 @@ const AudioVisualizer = (props) => {
         ref={canvasRef}
         className="absolute overflow-visible"
         style={{
-          left: "38%",
+          left: "40%",
           borderBottom: `2px solid rgba(255,255,255,.2)`,
           top: `${pos}%`,
         }}
@@ -92,7 +92,7 @@ const AudioVisualizer = (props) => {
         ref={canvasRefUnder}
         className="absolute overflow-visible"
         style={{
-          left: "38%",
+          left: "40%",
           top: `${pos + 10}%`,
         }}
       />

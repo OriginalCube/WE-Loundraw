@@ -38,12 +38,16 @@ const Player = (props) => {
   };
 
   const onSkip = () => {
-    if (songId + 1 < songData.length) {
-      setSongId(songId + 1);
+    if (!shuffle) {
+      if (songId + 1 < songData.length) {
+        setSongId(songId + 1);
+      } else {
+        setSongId(0);
+      }
+      clickAudio(0);
     } else {
-      setSongId(0);
+      setSongId(Math.floor(Math.random() * (songData.length - 1)));
     }
-    clickAudio(0);
   };
 
   const onPrev = () => {
@@ -73,11 +77,13 @@ const Player = (props) => {
 
   const onReplay = () => {
     setReplay(!replay);
+    setShuffle(false);
     clickAudio(0);
   };
 
   const onShuffle = () => {
     setShuffle(!shuffle);
+    setReplay(false);
     clickAudio(0);
   };
 
@@ -86,7 +92,11 @@ const Player = (props) => {
     clearInterval(intervalRef.current);
     intervalRef.current = setInterval(() => {
       if (audioRef.current.ended) {
-        onSkip();
+        if (!replay) {
+          onSkip();
+        } else {
+          audioRef.current.play();
+        }
       } else {
         setProgress(audioRef.current.currentTime);
       }
@@ -152,14 +162,19 @@ const Player = (props) => {
 
   return (
     <div
-      className="w-1/4 absolute flex flex-col bottom-10"
-      style={{ height: "12vh", left: "37.5%" }}
+      className="w-1/4 absolute flex flex-col bottom-10 rounded-md shadow-xl"
+      style={{
+        height: "12vh",
+        left: "37.5%",
+        border: "2px solid rgba(255,255,255,.6)",
+        backgroundColor: `rgba(255,255,255, .1)`,
+      }}
     >
-      <div className="w-full h-2/6">
+      <div className="w-full h-2/6 flex items-center justify-center">
         <input
           type="range"
-          className="w-full relative m-auto"
-          style={{ top: "60%" }}
+          className="relative m-auto"
+          style={{ top: "40%", width: "90%" }}
           step="1"
           min="0"
           value={trackProgress}
@@ -171,17 +186,20 @@ const Player = (props) => {
       </div>
       <div className="w-full h-2/6 text-white flex items-center justify-center">
         <p
-          style={{ fontSize: `${textSize * (10 * fSize)}rem` }}
-          className="text-center font-thin opacity-90"
+          style={{
+            textShadow: `1px 1px 2px rgb(0,0,0)`,
+            fontSize: `${textSize * (10 * fSize)}rem`,
+          }}
+          className="text-center font-normal opacity-90"
         >
           {songName}
         </p>
       </div>
-      <div className="flex w-5/6 m-auto h-2/6 relative items-center justify-center">
+      <div className="flex w-5/6 m-auto pb-2 h-2/6 relative items-center justify-center">
         <div className="w-full">
           <img
             onClick={onReplay}
-            className="opacity-90 m-auto object-contain "
+            className="opacity-90 m-auto object-contain"
             style={{ height: "2vh", width: "2vw" }}
             src={`./assets/icons/${!replay ? "replay" : "replayToggle"}.png`}
             alt=""

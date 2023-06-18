@@ -16,6 +16,11 @@
       "file": "./assets/music/Sayonara.mp3"
     },
     {
+      "name": "Friend A",
+      "artist": "Your lie in April",
+      "file": "./assets/music/Friend A.mp3"
+    },
+    {
       "name": "Ikebana",
       "artist": "Shin Suzuma",
       "file": "./assets/music/Ikebana.mp3"
@@ -26,9 +31,24 @@
       "file": "./assets/music/Because I love you.mp3"
     },
     {
+      "name": "Theme of Mitsuha",
+      "artist": "Summer Ghost OST",
+      "file": "./assets/music/Theme of Mitsuha.mp3"
+    },
+    {
       "name": "Summer Ghost",
       "artist": "Summer Ghost OST",
       "file": "./assets/music/Summer Ghost.mp3"
+    },
+    {
+      "name": "Again",
+      "artist": "Your lie in April / Theishter Ver.",
+      "file": "./assets/music/Again.mp3"
+    },
+    {
+      "name": "Date 2",
+      "artist": "Your name OST",
+      "file": "./assets/music/Date 2.mp3"
     },
     {
       "name": "Confession",
@@ -44,6 +64,21 @@
       "name": "Hajime wa nantonaku",
       "artist": "Summer Ghost OST",
       "file": "./assets/music/Hajime wa nantonaku.mp3"
+    },
+    {
+      "name": "Orange",
+      "artist": "Your Lie in April OST",
+      "file": "./assets/music/Orange.mp3"
+    },
+    {
+      "name": "Nandemonaiya",
+      "artist": "Your Name OST",
+      "file": "./assets/music/Nandemonaiya.mp3"
+    },
+    {
+      "name": "Sparkle - movie ver.",
+      "artist": "Your Name OST",
+      "file": "./assets/music/Sparkle - movie ver.mp3"
     }
   ],
   "ImageData": [
