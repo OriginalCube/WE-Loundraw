@@ -162,19 +162,17 @@ const Player = (props) => {
 
   return (
     <div
-      className="w-1/4 absolute flex flex-col bottom-10 rounded-md shadow-xl"
+      className="w-1/4 absolute flex flex-col bottom-10"
       style={{
         height: "12vh",
         left: "37.5%",
-        border: "2px solid rgba(255,255,255,.6)",
-        backgroundColor: `rgba(0,0,0, .1)`,
       }}
     >
       <div className="w-full h-2/6 flex items-center justify-center">
         <input
           type="range"
-          className="relative m-auto"
-          style={{ top: "40%", width: "90%" }}
+          className="relative w-full m-auto"
+          style={{ top: "40%" }}
           step="1"
           min="0"
           value={trackProgress}
@@ -187,7 +185,6 @@ const Player = (props) => {
       <div className="w-full h-2/6 text-white flex items-center justify-center">
         <p
           style={{
-            textShadow: `1px 1px 3px rgb(0,0,0)`,
             fontSize: `${textSize * (10 * fSize)}rem`,
           }}
           className="text-center font-thin opacity-90"
