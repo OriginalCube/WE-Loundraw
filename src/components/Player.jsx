@@ -167,7 +167,7 @@ const Player = (props) => {
         height: "12vh",
         left: "37.5%",
         border: "2px solid rgba(255,255,255,.6)",
-        backgroundColor: `rgba(255,255,255, .1)`,
+        backgroundColor: `rgba(0,0,0, .1)`,
       }}
     >
       <div className="w-full h-2/6 flex items-center justify-center">
@@ -187,10 +187,10 @@ const Player = (props) => {
       <div className="w-full h-2/6 text-white flex items-center justify-center">
         <p
           style={{
-            textShadow: `1px 1px 2px rgb(0,0,0)`,
+            textShadow: `1px 1px 3px rgb(0,0,0)`,
             fontSize: `${textSize * (10 * fSize)}rem`,
           }}
-          className="text-center font-normal opacity-90"
+          className="text-center font-thin opacity-90"
         >
           {songName}
         </p>
