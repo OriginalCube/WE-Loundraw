@@ -5,10 +5,11 @@ weather api feature that allows the user to display the current weather of the l
 <img src="https://i.imgur.com/pbfAf3D.png" />
 
 ## Time to finish 
-1 month
+1.3 month
 
 ##  Dev notes
-This was a redesign of my first-ever work for my wallpaper engine. This turned out pretty well for the time that it took me to finish this work.
+This was a redesign of my first-ever work for my wallpaper engine. This turned out pretty well for the time that it took me to finish this work. This took a lot of effort though because I had to seperate
+the images to create a 3d effect with the canvas animation.
 
 ## Built with
 React js - Front End
